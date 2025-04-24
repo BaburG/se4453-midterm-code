@@ -29,9 +29,6 @@ async def lifespan(app: FastAPI):
 # Create FastAPI app instance with lifespan manager
 app = FastAPI(lifespan=lifespan)
 
-# Mount static files directory
-app.mount("/static", StaticFiles(directory="static"), name="static")
-
 # Mount templates directory
 templates = Jinja2Templates(directory="templates")
 
