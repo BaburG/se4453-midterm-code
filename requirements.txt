@@ -1,4 +1,7 @@
-fastapi
-uvicorn
-jinja2
-python-multipart
+fastapi>=0.100.0
+uvicorn[standard]>=0.20.0
+asyncpg>=0.27.0
+python-dotenv>=1.0.0
+Jinja2>=3.1.0
+pydantic[email]>=1.10.0 # Include email for potential future validation
+python-multipart>=0.0.6 # Added for form data parsing 

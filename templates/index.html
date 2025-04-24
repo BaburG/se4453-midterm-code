@@ -1,33 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-
 <head>
-  <title>Hello Azure - Python Quickstart</title>
-  <link rel="stylesheet" href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}">
-  <link rel="shortcut icon" href="{{ url_for('static', path='favicon.ico') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI Notes</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
 </head>
-<html>
-
 <body>
-  <main>
-    <div class="px-4 py-3 my-2 text-center">
-      <img class="d-block mx-auto mb-4" src="{{ url_for('static', path='images/azure-icon.svg') }}" alt="Azure Logo"
-        width="192" height="192" />
-      <h1 class="display-6 fw-bold text-primary">Welcome to Azure</h1>
-    </div>
-    <form method="post" action="{{ url_for('hello')}}">
-      <div class="col-md-6 mx-auto text-center">
-        <label for="name" class="form-label fw-bold fs-5">Could you please tell me your name?</label>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
-          <input type="text" class="form-control" id="name" name="name" style="max-width: 256px;">
-        </div>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
-          <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Say Hello</button>
-        </div>
-      </div>
-    </form>
-  </main>
-</body>
+    <div class="container">
+        <h1>FastAPI Notes App</h1>
 
-</html>
+        <div class="form-container">
+            <h2>Add a New Note</h2>
+            <form action="/create" method="post">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="body">Body:</label>
+                    <textarea id="body" name="body" rows="4" required></textarea>
+                </div>
+                <button type="submit">Add Note</button>
+            </form>
+        </div>
+
+        <div class="notes-list">
+            <h2>Existing Notes</h2>
+            {% if notes %}
+                <ul>
+                    {% for note in notes %}
+                        <li>
+                            <h3>{{ note.title }}</h3>
+                            <p>{{ note.body }}</p>
+                            <small>Created at: {{ note.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No notes found. Add one above!</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html> 
